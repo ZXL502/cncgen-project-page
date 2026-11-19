@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="CNCGEN: learning object-referenced machining process plans and continuous toolpaths from B-rep models. Paper, machining simulation, and a runnable synthetic data preview.">
+  <meta name="referrer" content="no-referrer">
+  <title>CNCGEN · Machining Process Planning and Toolpath Generation</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b7285'/%3E%3Cpath d='M23 9H13L8 14v9h15' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="wordmark" href="#top" aria-label="CNCGEN home">CNC<span>GEN</span></a>
+      <nav aria-label="Page sections"><a href="#demo">Demo</a><a href="#overview">Method</a><a href="#dataset">Dataset</a><a href="#results">Results</a></nav>
+      <a class="nav-paper" href="assets/CNCGEN_preprint.pdf">Paper <span class="file-label">PDF</span></a>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero container" id="top">
+      <p class="eyebrow">CNCGEN <span>/</span> Research project</p>
+      <h1>A Dataset and Framework for<br class="desktop-break"> Machining Process Planning and<br class="desktop-break"> Toolpath Generation from B-rep Models</h1>
+      <p class="authors">Xiaolei Zhou <span>·</span> Boyi Lin <span>·</span> Yuchao Feng <span>·</span> Jianwei Zheng</p>
+      <div class="resource-links">
+        <a class="button primary" href="assets/CNCGEN_preprint.pdf">Read the paper <span>PDF</span></a>
+        <a class="button" href="https://huggingface.co/datasets/jimmy-zhou/CNCGEN" target="_blank" rel="noopener noreferrer">Dataset <span>Hugging Face</span></a>
+        <a class="button" href="#demo">Watch the demo</a>
+      </div>
+      <p class="hero-summary">Discrete operation decisions and continuous tool motion,<br class="desktop-break"> connected by shared manufacturing objects and evolving stock.</p>
+      <figure class="teaser">
+        <img src="assets/overview.png" width="2200" height="680" alt="B-rep input, manufacturing-object decomposition, process planning, toolpath generation, and material-removal outcome, connected by step-level state feedback.">
+        <figcaption>One manufacturing target, from operation selection to tool motion. Updated stock informs each subsequent step.</figcaption>
+      </figure>
+    </section>
+    <section class="demo-section" id="demo">
+      <div class="container">
+        <div class="section-heading"><p class="eyebrow">01 / Demo</p><h2>From geometry to a machining flow.</h2></div>
+        <div class="video-frame"><video id="demo-video" controls playsinline preload="metadata" poster="assets/demo-preview-v2.jpg" aria-label="CNCGEN recorded material-removal simulation with English explanations"><source src="assets/CNCGEN_demo_v2_captioned.mp4" type="video/mp4"><p>Your browser cannot play this video. <a href="assets/CNCGEN_demo_v2_captioned.mp4">Download the MP4.</a></p></video><button id="demo-start" class="demo-start" type="button" aria-label="Play CNCGEN demo" aria-controls="demo-video" hidden><span aria-hidden="true">&#9654;</span><span id="demo-start-label">Play demo</span></button></div>
+        <p id="demo-playback-status" class="media-note playback-status" role="status" hidden></p>
+        <div class="media-meta"><span>1 min 52 s · English-captioned simulation</span><a href="assets/CNCGEN_demo_v2_captioned.mp4" download>Download video</a></div>
+        <p class="media-note">Two recorded material-removal simulations with step-by-step explanations. Accelerated portions are marked.</p>
+      </div>
+    </section>
+    <section class="section container" id="overview">
+      <div class="section-heading"><p class="eyebrow">02 / Method</p><h2>A shared target for planning and motion.</h2></div>
+      <p class="lead">Each toolpath acts on the stock left by earlier cuts. CNCGEN connects operation planning and toolpath generation through shared manufacturing objects, uses the evolving state to refine subsequent steps, and learns material-removal consequences through verifier feedback.</p>
+      <figure class="method-figure">
+        <img src="assets/method.png" width="2200" height="1099" loading="lazy" alt="CNCGEN architecture: shared manufacturing-object memory, operation planning with prefix refinement, state-conditioned toolpath generation, and verification-guided training.">
+        <figcaption>Shared object memory links decisions to motion; state feedback adapts the next step.</figcaption>
+      </figure>
+    </section>
+    <section class="section container" id="dataset">
+      <div class="section-heading"><p class="eyebrow">03 / Dataset</p><h2>Machining flows with aligned supervision.</h2></div>
+      <div class="dataset-grid">
+        <div class="dataset-copy">
+          <div class="stats"><div class="stat"><strong>~50k</strong><span>Synthetic machining flows in the paper</span></div></div>
+          <p>B-rep geometry, object-referenced operations, toolpaths, stock states, and verification outcomes for three-axis machining.</p>
+        </div>
+        <aside class="release-card" aria-label="Current public dataset release">
+          <p class="eyebrow">Public preview</p><h3>20 synthetic examples</h3>
+          <p>CAD geometry and reference toolpaths. A format preview, not the full benchmark.</p>
+          <a class="button primary" href="https://huggingface.co/datasets/jimmy-zhou/CNCGEN/resolve/main/CNCGEN_synthetic_preview_v0.1.zip?download=true" rel="noopener noreferrer">Download samples <span>3.62 MB</span></a>
+          <p><a href="https://huggingface.co/datasets/jimmy-zhou/CNCGEN" target="_blank" rel="noopener noreferrer">Dataset card, tools, and instructions</a></p>
+        </aside>
+      </div>
+    </section>
+    <section class="section container" id="results">
+      <div class="section-heading"><p class="eyebrow">04 / Results</p><h2>Evaluate the removal, not just the sequence.</h2></div>
+      <figure class="qualitative-comparison" id="qualitative-comparison">
+        <div class="comparison-panels">
+          <div class="comparison-panel">
+            <h3>Target geometry</h3>
+            <div class="comparison-crop target-crop"><img src="assets/real-results.png" width="2200" height="555" loading="lazy" alt="Target geometry of a rectangular held-out part with a central cavity and surrounding holes."></div>
+          </div>
+          <div class="comparison-panel">
+            <h3>CNC-Net + Pred. MRP</h3>
+            <div class="comparison-crop baseline-crop"><img src="assets/real-results.png" width="2200" height="555" loading="lazy" alt="Adapted CNC-Net final geometry for the same part, with fragmented residual structures inside the cavity."></div>
+          </div>
+          <div class="comparison-panel">
+            <h3>CNCGEN</h3>
+            <div class="comparison-crop cncgen-crop"><img src="assets/real-results.png" width="2200" height="555" loading="lazy" alt="CNCGEN final geometry for the same part, recovering the cavity more completely."></div>
+          </div>
+        </div>
+        <figcaption>Held-out real-part example under the common offline geometry evaluator. CNCGEN recovers the cavity more completely; the adapted baseline leaves fragmented residual material. <a href="assets/real-results.png">Full comparison</a>.</figcaption>
+      </figure>
+      <p class="section-intro">Material-removal F1 under offline geometry evaluation: adapted CNC-Net with predicted region priors versus CNCGEN. Higher is better.</p>
+      <div class="result-highlights">
+        <article><p class="eyebrow">Synthetic test set</p><p class="metric-pair"><span class="baseline-value" data-result="0.2318">0.2318</span><span class="metric-separator">→</span><strong data-result="0.9016">0.9016</strong></p><p class="metric-label">CNC-Net + Pred. MRP → CNCGEN</p></article>
+        <article><p class="eyebrow">Held-out real records</p><p class="metric-pair"><span class="baseline-value" data-result="0.1170">0.1170</span><span class="metric-separator">→</span><strong data-result="0.8126">0.8126</strong></p><p class="metric-label">CNC-Net + Pred. MRP → CNCGEN</p></article>
+      </div>
+      <p class="results-note">Ablations show that similar sequence accuracy can hide very different material-removal quality, supporting state-conditioned toolpaths. <a href="assets/CNCGEN_preprint.pdf">See the paper for full comparisons and ablations.</a></p>
+    </section>
+    <section class="section container" id="citation">
+      <div class="section-heading"><p class="eyebrow">05 / Citation</p><h2>CNCGEN</h2></div>
+      <details class="citation-details"><summary>BibTeX</summary>
+        <div class="code-shell citation-box"><div class="code-heading"><span>Citation</span><button class="copy-button" type="button" data-copy="bibtex">Copy citation</button></div><pre id="bibtex">@misc{zhou2026cncgen,
+  title = {CNCGEN: A Dataset and Framework for Machining Process
+           Planning and Toolpath Generation from B-rep Models},
+  author = {Zhou, Xiaolei and Lin, Boyi and Feng, Yuchao and Zheng, Jianwei},
+  year = {2026},
+  note = {Preprint}
+}</pre></div>
+      </details>
+      <div id="copy-status" class="copy-status" role="status" aria-live="polite"></div>
+      <p class="status-note"><a href="assets/CNCGEN_preprint.pdf">Paper PDF</a> · <a href="https://huggingface.co/datasets/jimmy-zhou/CNCGEN" target="_blank" rel="noopener noreferrer">Dataset</a></p>
+      <p class="media-note">Research toolpaths require machine-specific post-processing and safety checks. Scope and limitations are described in the paper.</p>
+    </section>
+  </main>
+  <footer><div class="container footer-inner"><span class="wordmark">CNC<span>GEN</span></span><p>Research materials · Preprint</p><a href="#top">Back to top</a></div></footer>
+</body>
+</html>
