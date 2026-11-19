@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00:06.000 --> 00:00:09.500
+The B-rep model specifies the target geometry.
+
+00:00:09.500 --> 00:00:15.000
+The simulation starts from stock material.
+
+00:00:15.000 --> 00:00:23.000
+Each operation removes material along a toolpath.
+
+00:00:23.000 --> 00:00:31.000
+CNCGEN links planning and toolpaths through shared manufacturing objects.
+
+00:00:31.000 --> 00:00:38.000
+Earlier cuts change the material available to later steps.
+
+00:00:38.000 --> 00:00:42.267
+The updated stock records the effects of successive cuts.
+
+00:00:42.267 --> 00:00:46.267
+The first case ends with the simulated workpiece.
+
+00:00:46.267 --> 00:00:49.267
+The second case combines a pocket, edges, and holes.
+
+00:00:49.267 --> 00:00:57.533
+Cutting starts at the edge of the second part.
+
+00:00:57.533 --> 00:01:05.533
+The readout identifies the current operation and tool.
+
+00:01:05.533 --> 00:01:13.533
+The evolving stock preserves the effects of preceding cuts.
+
+00:01:13.533 --> 00:01:21.033
+Each new cut acts on the stock left by earlier operations.
+
+00:01:21.033 --> 00:01:30.033
+The cutter traces the central pocket as the stock is updated.
+
+00:01:30.033 --> 00:01:37.033
+The sequence continues with the corner features.
+
+00:01:37.033 --> 00:01:42.767
+Further cuts form the corner holes.
+
+00:01:42.767 --> 00:01:46.267
+The second case ends with its final simulated geometry.
